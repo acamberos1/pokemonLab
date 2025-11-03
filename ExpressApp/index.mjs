@@ -31,6 +31,35 @@ app.get('/pokeRand', (req, res) => {
    });
 });
 
+
+// Search form route
+app.get('/pokemon/search', (req, res) => {
+   res.render('pokemon-search.ejs');
+});
+
+
+
+
+// Search result route
+app.get('/pokemon/result', (req, res) => {
+   const searchId = parseInt(req.query.id);
+   const pokemonName = pokemon.getName(searchId);
+   
+   if (pokemonName) {
+      res.render('pokemon-result.ejs', { 
+         name: pokemonName,
+         id: searchId,
+         found: true
+      });
+   } else {
+      res.render('pokemon-result.ejs', { 
+         name: 'Not Found',
+         id: searchId,
+         found: false
+      });
+   }
+});
+
 app.listen(3000, () => {
    console.log('server started');
 });
