@@ -12,11 +12,22 @@ app.get('/', (req, res) => {
 
 // make 4 individual routes for the express app , need node package, another for api, must receive user imput
 
-// route one animal name 
+// route one all animals
 app.get('/pokemon', (req, res) => {
    const allPokemon = pokemon.all();
    res.render('pokemon.ejs', { 
       pokemonList: allPokemon
+   });
+});
+
+// route two random animal 
+app.get('/pokeRand', (req, res) => {
+   const randomPokemon = pokemon.random();
+   const pokemonId = pokemon.getId(randomPokemon);
+   
+   res.render('pokeRand.ejs', { 
+      name: randomPokemon,
+      id: pokemonId
    });
 });
 
